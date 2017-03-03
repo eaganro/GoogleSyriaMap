@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="SyriaMap.css">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Adding a Custom Overlay</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+        margin-top: 0%; 
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw-qOQv-LEsJxS4LfkpB4vugp0Y6G5QVo"></script>
+  </head>
+  <body>
+    <div id="left">
+        <div><input id="mapDate" type="date" min="2013-04-29"></div>
+        <div id="buttonDiv">
+          <button onclick="showKey()" id="dropButton">Show Key</button>
+          <div id="keyDrop" class="key">
+            <table id="keyTable">
+              <thead>
+                <tr>
+                  <th>Faction</th>
+                  <th>Color</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Syrian opposition</td>
+                  <td style="background-color:#cae7c4;"></td>
+                </tr>
+                <tr>
+                  <td>Syrian gov</td>
+                  <td style="background-color:#ebc0b3;"></td>
+                </tr>
+                <tr>
+                  <td>Iraqi gov</td>
+                  <td style="background-color:#cc829b;"></td>
+                </tr>
+                <tr>
+                  <td>Lebanese gov</td>
+                  <td style="background-color:#ffa067;"></td>
+                </tr>
+                <tr>
+                  <td>Hezbollah</td>
+                  <td style="background-color:#3e79ff;"></td>
+                </tr>
+                <tr>
+                  <td>ISIS</td>
+                  <td style="background-color:#b3b2ae;"></td>
+                </tr>
+                <tr>
+                  <td>al-Nusra</td>
+                  <td style="background-color:#fff7fd;"></td>
+                </tr>
+                <tr>
+                  <td>Syrian Kurdistan</td>
+                  <td style="background-color:#e2d974;"></td>
+                </tr>
+                <tr>
+                  <td>Iraqi Kurdistan</td>
+                  <td style="background-color:#d2cd7e;"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <div id="map"></div>
+  <script type="text/javascript" src="SyriaMap.js"></script>
+  </body>
+</html>

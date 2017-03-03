@@ -1,0 +1,21 @@
+{
+  "name": "syriamap",
+  "version": "1.0.0",
+  "description": "Map of Syria and Iraq over time.",
+  "main": "SyriaMap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "latest",
+    "request": "latest",
+    "cheerio": "latest",
+    "cron": "latest",
+    "fs": "latest",
+    "mysql": "latest",
+    "body-parser": "latest"
+  }
+}
