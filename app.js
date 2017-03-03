@@ -1,5 +1,4 @@
 var express = require('express');
-//var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var mysql = require("mysql");
@@ -104,7 +103,6 @@ var job = new cronJob({
         
         con.query('INSERT IGNORE INTO syriaMaps VALUES (\''+ mapDateString +'\', \''+mapURLs[j].replace("https:", "")+'\');',function(err,rows){
           if(err) throw err;
-          //console.log(rows);
         });
         console.log(mapURLs[j].replace("https:", ""));
       }
@@ -117,4 +115,4 @@ var job = new cronJob({
 });
 job.start();
 
-app.listen(3020);
+app.listen(3021);
