@@ -4,7 +4,7 @@ var lat;
 var lang;
 var lowDate = new Date("04-28-2013");
 var dateSelector = document.getElementById('mapDate');
-//var map = document.getElementById('map');
+
 var urlExtra = {
   date:"",
   zoom:"",
@@ -79,7 +79,7 @@ function changeMap(){
   };
   xhr.send(data);
 }
-
+var overlayTemp; 
 function removeOldMap(){
   overlayTemp.setMap(null);
 }
@@ -126,7 +126,7 @@ function getMapInfo(){
 window.onload = getMapInfo;
 
 var overlay;
-var overlayTemp; 
+
 // Initialize the map and the custom overlay.
 
 function initMap(url, zooom, latitude, longitude) {
@@ -138,7 +138,7 @@ function initMap(url, zooom, latitude, longitude) {
     overlayTemp = new google.maps.GroundOverlay();
     overlayTemp = overlay;
     srcImage = url;
-    setTimeout(removeOldMap, 500);
+    setTimeout(removeOldMap, 10000);
   }else{
     srcImage = 'https://upload.wikimedia.org/wikipedia/commons/1/11/Syrian%2C_Iraqi%2C_and_Lebanese_insurgencies.png';
   }
@@ -147,5 +147,3 @@ function initMap(url, zooom, latitude, longitude) {
   overlay.setMap(map);
   overlay.setOpacity(1);
 }
-//google.maps.event.addDomListener(window, 'load', initMap);
-

@@ -5,28 +5,6 @@
   margin-top: 3rem;
   z-index: 10;
 }
-#right{
-  position: absolute;
-  float:right;
-  overflow: scroll;
-  width:100%;
-  margin-left: -8px;
-  margin-top: -8px;
-  margin-bottom: -4px;
-}
-
-#mapZoom{
-  width:28%;
-  background-color: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  height:1rem;
-  margin-top: -.1rem;
-  margin-left: -.25rem;
-  padding-left: .4rem;
-  font-family: serif;
-  font-size: 15px;
-}
 
 #mapDate{
   width:8.6rem;
@@ -88,25 +66,9 @@
   width: 2em;
 }
 
-#zoomButtons{
-  margin-left:11.6em;
-  margin-top: -2.55em;
-  position: absolute;
-}
-
-#zoomButtons button{
+#opacitySlider{
   background-color: rgba(0,0,0,0.5);
-  height: 2.7em;
-  border: 1px solid black;
-  margin-top: -.04em;
-  color: white;
-  width:2em;
+  border-radius: 20px;
+  width: 11.3rem;
 }
 
-#zoomButtons button:first-of-type{
-  margin-top: 0em;
-}
-
-#zoomButtons button:hover{
-  background-color: rgba(0,0,0,0.7);
-}
