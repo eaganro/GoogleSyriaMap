@@ -94,14 +94,13 @@ var job = new cronJob({
       });
       function doQuery1(){
         var defered = Q.defer();
-        con.query('DELETE * FROM syriaMaps ORDER BY mapDate DESC limit 1;',function(err,rows){
+        con.query('DELETE FROM syriaMaps ORDER BY mapDate DESC limit 1;',function(err,rows){
             if(err) throw err;
           });
         return defered.promise;
       }
 
       function doQuery2(){
-        var defered = Q.defer();
         console.log(mapURLs.length);
         for(j=0; j < mapURLs.length; j++){
           mapDates[j].setHours(mapDates[j].getHours() - 5);
@@ -112,10 +111,9 @@ var job = new cronJob({
         });
         console.log(mapURLs[j].replace("https:", ""));
         }
-        return defered.promise;
       }
 
-      Q.all([doQuery1(),doQuery2()]);
+      Q.fcall([doQuery1()]).then(doQuery2());
       
       con.end(function(err) {
       });
