@@ -13,7 +13,7 @@ var urlExtra = {
 var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
       center: {lat: 33.933860, lng: 41.416260},
-        mapTypeId: 'roadmap', mapTypeControl: false
+        mapTypeId: 'roadmap', mapTypeControl: false, streetViewControl: false
     });
 
 
