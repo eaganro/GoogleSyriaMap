@@ -4,6 +4,7 @@ var cheerio = require('cheerio');
 var mysql = require("mysql");
 var bodyParser = require('body-parser');
 var cronJob = require('cron').CronJob;
+var Q = require("q");
 var settings = require("./settings.js");
 
 
@@ -91,21 +92,31 @@ var job = new cronJob({
         }
         console.log('Connection established');
       });
+      function doQuery1(){
+        var defered = Q.defer();
+        con.query('DELETE * FROM syriaMaps ORDER BY mapDate DESC limit 1;',function(err,rows){
+            if(err) throw err;
+          });
+        return defered.promise;
+      }
 
-      con.query('DELETE * FROM syriaMaps ORDER BY mapDate DESC limit 1;',function(err,rows){
-          if(err) throw err;
-        });
-
-      console.log(mapURLs.length);
-      for(j=0; j < mapURLs.length; j++){
-        mapDates[j].setHours(mapDates[j].getHours() - 5);
-        mapDateString = mapDates[j].toISOString().replace("T", " ").replace(".000Z", "");
+      function doQuery2(){
+        var defered = Q.defer();
+        console.log(mapURLs.length);
+        for(j=0; j < mapURLs.length; j++){
+          mapDates[j].setHours(mapDates[j].getHours() - 5);
+          mapDateString = mapDates[j].toISOString().replace("T", " ").replace(".000Z", "");
         
-        con.query('INSERT IGNORE INTO syriaMaps VALUES (\''+ mapDateString +'\', \''+mapURLs[j].replace("https:", "")+'\');',function(err,rows){
+          con.query('INSERT IGNORE INTO syriaMaps VALUES (\''+ mapDateString +'\', \''+mapURLs[j].replace("https:", "")+'\');',function(err,rows){
           if(err) throw err;
         });
         console.log(mapURLs[j].replace("https:", ""));
+        }
+        return defered.promise;
       }
+
+      Q.all([doQuery1(),doQuery2()]);
+      
       con.end(function(err) {
       });
     });

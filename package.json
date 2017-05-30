@@ -16,6 +16,7 @@
     "cron": "latest",
     "fs": "latest",
     "mysql": "latest",
-    "body-parser": "latest"
+    "body-parser": "latest",
+    "q": "latest"
   }
 }
