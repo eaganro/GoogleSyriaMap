@@ -58,7 +58,7 @@ var job = new cronJob({
   cronTime: '00 00 12 * * *',
   onTick: function() {
     console.log("cron");
-    var url = "https://commons.wikimedia.org/w/index.php?title=File:Syrian,_Iraqi,_and_Lebanese_insurgencies.png&dir=prev&limit=500#filehistory";
+    var url = "https://commons.wikimedia.org/w/index.php?title=File:Syrian,_Iraqi,_and_Lebanese_insurgencies.png&offset=&limit=500#filehistory";
     var mapURLs = [];
     var mapDates = [];
     var mapDateObjs = [];
