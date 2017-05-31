@@ -89,6 +89,7 @@ function changeMap(type){
 var overlayTemp; 
 function removeOldMap(){
   overlayTemp.setMap(null);
+  console.log("-----------------deleted------------")
 }
 
 function showKey(){
@@ -145,7 +146,7 @@ function initMap(url, zooom, latitude, longitude) {
     overlayTemp = new google.maps.GroundOverlay();
     overlayTemp = overlay;
     srcImage = url;
-    setTimeout(removeOldMap, 10000);
+    setTimeout(removeOldMap, 3000);
   }else{
     srcImage = 'https://upload.wikimedia.org/wikipedia/commons/1/11/Syrian%2C_Iraqi%2C_and_Lebanese_insurgencies.png';
   }
