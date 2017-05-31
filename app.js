@@ -41,14 +41,33 @@ app.post('/mapUpdate', function(req, res) {
       console.log('Connection established');
   });
 
-  con.query('SELECT * FROM syriaMaps WHERE mapDate BETWEEN CAST(\'2013-04-05\' AS DATETIME) AND CAST(\''+year+'-'+month+'-'+day+' '+23+':'+59+':'+59+'\' AS DATETIME) ORDER BY mapDate DESC limit 1;',function(err,rows){
-    if(err) throw err;
+  if(req.body.type == "pre"){
+    con.query('SELECT * FROM syriaMaps WHERE mapDate < CAST(\''+year+'-'+month+'-'+day+' '+0+':'+0+':'+0+'\' AS DATETIME) ORDER BY mapDate DESC limit 1',function(err,rows){
+      if(err) throw err;
+      console.log('Data received from Db:\n');
+      console.log(rows);
+      res.send(rows[0]);
+    });
+  }
 
-    console.log('Data received from Db:\n');
-    rows[0].mapDate.setHours(rows[0].mapDate.getHours() - 4);
-    console.log(rows);
-    res.send(rows[0]);
-  });
+  if(req.body.type == "next"){
+    con.query('SELECT * FROM syriaMaps WHERE mapDate > CAST(\''+year+'-'+month+'-'+day+' '+23+':'+59+':'+59+'\' AS DATETIME) ORDER BY mapDate limit 1',function(err,rows){
+      if(err) throw err;
+      console.log('Data received from Db:\n');
+      console.log(rows);
+      res.send(rows[0]);
+    });
+  }
+
+  if(req.body.type == 'change'){
+    con.query('SELECT * FROM syriaMaps WHERE mapDate BETWEEN CAST(\'2013-04-05\' AS DATETIME) AND CAST(\''+year+'-'+month+'-'+day+' '+23+':'+59+':'+59+'\' AS DATETIME) ORDER BY mapDate DESC limit 1;',function(err,rows){
+      if(err) throw err;
+      console.log('Data received from Db:\n');
+      console.log(rows);
+      res.send(rows[0]);
+    });
+  }
+  
   con.end(function(err) {
 
   });

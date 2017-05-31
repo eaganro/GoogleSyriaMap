@@ -20,9 +20,9 @@ var map = new google.maps.Map(document.getElementById('map'), {
 dateSelector.addEventListener('change', dateListener);
 
 function dateListener(){
-  dateParts = `${dateSelector.value}`.split('-');
+  var dateParts = `${dateSelector.value}`.split('-');
   date = new Date(`${dateParts[1]}-${dateParts[2]}-${dateParts[0]}`);
-  if(date > lowDate) changeMap();
+  if(date > lowDate) changeMap("change");
 }
 
 google.maps.event.addDomListener(map,'zoom_changed', function() {
@@ -41,6 +41,13 @@ map.addListener('center_changed', function() {
   }
 });
 
+document.getElementById('preMapBut').addEventListener('click', function(){
+  changeMap("pre");
+});
+document.getElementById('nextMapBut').addEventListener('click', function(){
+  changeMap("next");
+});
+
 function changeCenter(){
   console.log(lat);
   console.log(lang);
@@ -49,11 +56,9 @@ function changeCenter(){
   map.setCenter(latlng);
 }
 
-function changeMap(){
-  date.setHours(23);
-  date.setMinutes(59);
-  date.setSeconds(59);
-  var data = JSON.stringify({year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate()});
+function changeMap(type){
+  var data = JSON.stringify({year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate(), type: type});
+  console.log(data);
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "/mapUpdate", true);
   xhr.setRequestHeader("Content-type","application/json");
@@ -75,7 +80,9 @@ function changeMap(){
           urlExtra.center = map.getCenter();
           history.pushState({}, "", "/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
           dateSelector.value = urlExtra.date;
-      }
+          var dateParts = `${dateSelector.value}`.split('-');
+          date = new Date(`${dateParts[1]}-${dateParts[2]}-${dateParts[0]}`);
+        }
   };
   xhr.send(data);
 }
@@ -115,12 +122,12 @@ function getMapInfo(){
     lang = langstring.substr(3, langstring.indexOf(')')-3);
     console.log(lat);
     console.log(lang);
-    console.log(zoom);
-    changeMap();
+    console.loge(zoom);
+    changeMap("change");
     changeCenter();
   }else{
     date = new Date();
-    changeMap();
+    changeMap("change");
   }
 }
 window.onload = getMapInfo;
