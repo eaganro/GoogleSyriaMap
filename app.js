@@ -45,7 +45,7 @@ app.post('/mapUpdate', function(req, res) {
     if(err) throw err;
 
     console.log('Data received from Db:\n');
-    rows[0].mapDate.setHours(rows[0].mapDate.getHours() - 5);
+    rows[0].mapDate.setHours(rows[0].mapDate.getHours() - 4);
     console.log(rows);
     res.send(rows[0]);
   });
@@ -55,15 +55,12 @@ app.post('/mapUpdate', function(req, res) {
 });
 
 var job = new cronJob({
-  cronTime: '00 00 12 * * *',
+  cronTime: '59 59 23 * * *',
   onTick: function() {
     console.log("cron");
-    var url = "https://commons.wikimedia.org/w/index.php?title=File:Syrian,_Iraqi,_and_Lebanese_insurgencies.png&offset=&limit=500#filehistory";
+    var url = "https://commons.wikimedia.org/w/index.php?title=File:Syrian,_Iraqi,_and_Lebanese_insurgencies.png&dir=prev&offset=20170104023216&limit=500#filehistory";
     var mapURLs = [];
     var mapDates = [];
-    var mapDateObjs = [];
-    var nullVall = null;
-    var lowDate = new Date("06-12-2014");
     request(url, function(error, response, html){
       var $ = cheerio.load(html);
 
@@ -103,7 +100,10 @@ var job = new cronJob({
       function doQuery2(){
         console.log(mapURLs.length);
         for(j=0; j < mapURLs.length; j++){
-          mapDates[j].setHours(mapDates[j].getHours() - 5);
+          mapDates[j].setHours(0);
+          mapDates[j].setMinutes(0);
+          mapDates[j].setSeconds(0);
+
           mapDateString = mapDates[j].toISOString().replace("T", " ").replace(".000Z", "");
         
           con.query('INSERT IGNORE INTO syriaMaps VALUES (\''+ mapDateString +'\', \''+mapURLs[j].replace("https:", "")+'\');',function(err,rows){
