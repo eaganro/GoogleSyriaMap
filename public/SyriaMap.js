@@ -37,7 +37,7 @@ function dateListener(){
   var dateParts = `${dateSelector.value}`.split('-');
   console.log(dateParts);
   dateParts[1] ++;
-  date = new Date (dateParts[0],dateParts[1],dateParts[2]);
+  date = new Date (dateParts[0],dateParts[1]-1,dateParts[2]);
   //date = new Date(dateParts[0]+'-'+dateParts[1]+'-'+dateParts[2]);
   console.log(navigator.userAgent);
   console.log(date);
@@ -79,7 +79,7 @@ function changeCenter(){
 }
 
 function changeMap(type){
-  var data = JSON.stringify({year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), type: type});
+  var data = JSON.stringify({year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate(), type: type});
   console.log(date.getMonth());
   console.log(date.getDate());
   console.log("DATA:" + data);
@@ -106,8 +106,9 @@ function changeMap(type){
           history.pushState({}, "", "/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
           dateSelector.value = urlExtra.date;
           var dateParts = dateSelector.value.split('-');
-          date = new Date (dateParts[0],dateParts[1],dateParts[2]);
+          date = new Date (dateParts[0],dateParts[1]-1,dateParts[2]);
           //date.setDate(date.getDate() +1);
+          console.log(date.getMonth() );
           console.log(date);
         }
   };
@@ -142,7 +143,7 @@ function getMapInfo(){
 
     var dateParts = urlSplit2[0].split('-');
     console.log(dateParts);
-    date = new Date (dateParts[0],dateParts[1],dateParts[2]);
+    date = new Date (dateParts[0],dateParts[1]-1,dateParts[2]);
     zoom = parseInt(urlSplit2[1]);
     var latlang = urlSplit2[2];
     lat = latlang.substr(1,latlang.indexOf(',')-1);
@@ -156,7 +157,7 @@ function getMapInfo(){
     changeCenter();
   }else{
     date = new Date();
-    date.setMonth(date.getMonth()+1);
+    date.setMonth(date.getMonth());
     console.log(date);
     console.log(date.getMonth());
     changeMap("change");
