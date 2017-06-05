@@ -107,7 +107,7 @@ function changeMap(type){
           dateSelector.value = urlExtra.date;
           var dateParts = dateSelector.value.split('-');
           date = new Date (dateParts[0],dateParts[1],dateParts[2]);
-          date.setDate(date.getDate() +1);
+          //date.setDate(date.getDate() +1);
           console.log(date);
         }
   };
