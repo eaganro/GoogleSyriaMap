@@ -10,13 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "latest",
-    "request": "latest",
+    "body-parser": "latest",
     "cheerio": "latest",
     "cron": "latest",
+    "express": "latest",
     "fs": "latest",
+    "js-datepicker": "^2.0.4",
     "mysql": "latest",
-    "body-parser": "latest",
-    "q": "latest"
+    "q": "latest",
+    "request": "latest"
   }
 }

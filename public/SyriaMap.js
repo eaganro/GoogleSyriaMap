@@ -4,6 +4,19 @@ var lat;
 var lang;
 var lowDate = new Date("04-28-2013");
 var dateSelector = document.getElementById('mapDate');
+var datePick = datepicker(document.getElementById('mapDate'), {
+  minDate: new Date(2015, 5, 6), // June 1st, 2016. 
+  maxDate: new Date(2099, 0, 1), // Jan 1st, 2099.
+  formatter: function(el, date) {
+    // This will display the date as `1/1/2017`. 
+    el.value = date.getFullYear()+'-'+(date.getMonth())+'-'+date.getDate();
+    console.log("please lord: " + el.value);
+  }, 
+  onSelect: function(instance) {
+    // Show which date was selected. 
+    dateListener();
+  }
+});
 
 var urlExtra = {
   date:"",
@@ -14,15 +27,24 @@ var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
       center: {lat: 33.933860, lng: 41.416260},
         mapTypeId: 'roadmap', mapTypeControl: false, streetViewControl: false
-    });
+});
 
 
 dateSelector.addEventListener('change', dateListener);
 
 function dateListener(){
+  console.log(dateSelector.value);
   var dateParts = `${dateSelector.value}`.split('-');
-  date = new Date(`${dateParts[1]}-${dateParts[2]}-${dateParts[0]}`);
-  if(date > lowDate) changeMap("change");
+  console.log(dateParts);
+  dateParts[1] ++;
+  date = new Date (dateParts[0],dateParts[1],dateParts[2]);
+  //date = new Date(dateParts[0]+'-'+dateParts[1]+'-'+dateParts[2]);
+  console.log(navigator.userAgent);
+  console.log(date);
+  //if(date > lowDate) changeMap("change");
+  //if(date < lowDate) changeMap("change");
+
+  changeMap("change");
 }
 
 google.maps.event.addDomListener(map,'zoom_changed', function() {
@@ -57,15 +79,17 @@ function changeCenter(){
 }
 
 function changeMap(type){
-  var data = JSON.stringify({year: date.getFullYear(), month: date.getMonth()+1, day: date.getDate(), type: type});
-  console.log(data);
+  var data = JSON.stringify({year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), type: type});
+  console.log(date.getMonth());
+  console.log(date.getDate());
+  console.log("DATA:" + data);
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "/mapUpdate", true);
   xhr.setRequestHeader("Content-type","application/json");
   xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
         console.log(lat);
-          console.log(lang);
+          console.log(xhr.responseText);
           var response = JSON.parse(xhr.responseText);
           if(xhr.responseText.includes("https:")){
             initMap(response.mapURL, zoom, lat, lang)
@@ -75,13 +99,16 @@ function changeMap(type){
           console.log(lat);
           console.log(lang);
           console.log(zoom);
+          console.log(response.mapDate);
           urlExtra.date = response.mapDate.substring(0,10);
           urlExtra.zoom = map.getZoom();
           urlExtra.center = map.getCenter();
           history.pushState({}, "", "/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
           dateSelector.value = urlExtra.date;
-          var dateParts = `${dateSelector.value}`.split('-');
-          date = new Date(`${dateParts[1]}-${dateParts[2]}-${dateParts[0]}`);
+          var dateParts = dateSelector.value.split('-');
+          date = new Date (dateParts[0],dateParts[1],dateParts[2]);
+          date.setDate(date.getDate() +1);
+          console.log(date);
         }
   };
   xhr.send(data);
@@ -113,8 +140,9 @@ function getMapInfo(){
       var urlSplit2 = urlSplit;
     }
 
-    var dateparts = urlSplit2[0].split('-');
-    date = new Date(dateparts[1]+'-'+dateparts[2]+'-'+dateparts[0]);
+    var dateParts = urlSplit2[0].split('-');
+    console.log(dateParts);
+    date = new Date (dateParts[0],dateParts[1],dateParts[2]);
     zoom = parseInt(urlSplit2[1]);
     var latlang = urlSplit2[2];
     lat = latlang.substr(1,latlang.indexOf(',')-1);
@@ -123,7 +151,7 @@ function getMapInfo(){
     lang = langstring.substr(3, langstring.indexOf(')')-3);
     console.log(lat);
     console.log(lang);
-    console.loge(zoom);
+    console.log(zoom);
     changeMap("change");
     changeCenter();
   }else{

@@ -7,13 +7,17 @@
 }
 
 #mapDate{
-  width:8.6rem;
+  width:8.5rem;
   background-color: rgba(0,0,0,0.5);
   color: white;
   border: none;
   padding-left: 3rem;
   font-family: serif;
   font-size: 15px;
+}
+#mapDate:hover{
+  background-color: rgba(0,0,0,0.7);
+  cursor: pointer;
 }
 
 #left label{
@@ -28,9 +32,11 @@
 
 #dropButton{
   background-color: rgba(0,0,0,0.5);
-  width:16.9em;
+  width:15.4em;
   border: none;
   color: white;
+  font-family: serif;
+  font-size: 12px;
 }
 
 #dropButton:hover{
@@ -41,7 +47,7 @@
 .key{
   display:none;
   background-color: rgba(0,0,0,0.5);
-  width: 11.6em;
+  width: 11.55em;
 }
 
 .showKey{
@@ -66,9 +72,30 @@
   width: 2em;
 }
 
-#opacitySlider{
+#preMapBut{
+  width:5.8rem;
   background-color: rgba(0,0,0,0.5);
-  border-radius: 20px;
-  width: 11.3rem;
+  color: white;
+  border: none;
+  font-family: serif;
+  font-size: 14px;
+}
+#nextMapBut{
+  width:5.8rem;
+  margin-left: -.3em;
+
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-family: serif;
+  font-size: 14px;
 }
 
+#preMapBut:hover{
+  background-color: rgba(0,0,0,0.7);
+  cursor: pointer;
+}
+#nextMapBut:hover{
+  background-color: rgba(0,0,0,0.7);
+  cursor: pointer;
+}

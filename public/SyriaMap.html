@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="SyriaMap.css">
+    <link rel="stylesheet" href="datepicker.css">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Syria And Iraq Civil War Map</title>
@@ -16,7 +17,7 @@
         padding: 0;
       }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw-qOQv-LEsJxS4LfkpB4vugp0Y6G5QVo"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw-qOQv-LEsJxS4LfkpB4vugp0Y6G5QVo"></script>
   </head>
   <body>
     <div id="left">
@@ -24,7 +25,7 @@
           <button id="preMapBut">Previous Map</button>
           <button id="nextMapBut">Next Map</button>
         </div>
-        <div><input id="mapDate" type="date" min="2013-04-29"></div>
+        <div><input id="mapDate" type="text"></div>
         <div id="buttonDiv">
           <button onclick="showKey()" id="dropButton">Show Key</button>
           <div id="keyDrop" class="key">
@@ -78,6 +79,7 @@
         </div>
       </div>
     <div id="map"></div>
+  <script src="datepicker.js"></script> 
   <script type="text/javascript" src="SyriaMap.js"></script>
   </body>
 </html>
