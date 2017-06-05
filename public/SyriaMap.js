@@ -156,6 +156,9 @@ function getMapInfo(){
     changeCenter();
   }else{
     date = new Date();
+    date.setMonth(date.getMonth()+1);
+    console.log(date);
+    console.log(date.getMonth());
     changeMap("change");
   }
 }
