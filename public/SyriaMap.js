@@ -133,23 +133,22 @@ function showKey(){
 function getMapInfo(){
   var url = window.location.href.split("/?")[1];
   if(url){
-    var urlSplit = url.split("/");
-    var urlSplit2;
+    var urlSplit = url.split(/\/|%2F/);
+    console.log()
+    /*var urlSplit2;
     if(urlSplit.length == 1){
-      urlSplit2 = urlSplit[0].split("%2F");
+      urlSplit2 = urlSplit[0].split(/%2F|%2C/);
     } else{
       var urlSplit2 = urlSplit;
-    }
+    }*/
 
-    var dateParts = urlSplit2[0].split('-');
+    var dateParts = urlSplit[0].split('-');
     console.log(dateParts);
     date = new Date (dateParts[0],dateParts[1]-1,dateParts[2]);
-    zoom = parseInt(urlSplit2[1]);
-    var latlang = urlSplit2[2];
-    lat = latlang.substr(1,latlang.indexOf(',')-1);
-    var langstring = latlang.substr(latlang.indexOf(',')+1);
-    console.log("string" +langstring + "   "+langstring.indexOf(')'));
-    lang = langstring.substr(3, langstring.indexOf(')')-3);
+    zoom = parseInt(urlSplit[1]);
+    var latlang = urlSplit[2].slice(1,urlSplit[2].length-2).split(/,%20|%2C%20/);
+    lat = latlang[0]
+    lang = latlang[1]
     console.log(lat);
     console.log(lang);
     console.log(zoom);
