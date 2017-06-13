@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 var cronJob = require('cron').CronJob;
 var Q = require("q");
 var settings = require("./settings.js");
+var router = express.Router();
+
 
 
 var app = express();
@@ -15,11 +17,11 @@ app.use(bodyParser.json()); // support json encoded bodies
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function(req, res) {
+router.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/SyriaMap.html');
 });
 
-app.post('/mapUpdate', function(req, res) {
+router.post('/mapUpdate', function(req, res) {
   var year = req.body.year;
   var month = req.body.month;
   var day = req.body.day;
@@ -143,4 +145,4 @@ var job = new cronJob({
 });
 job.start();
 
-app.listen(3021);
+app.listen(3021, 'localhost');

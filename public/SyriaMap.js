@@ -50,7 +50,7 @@ function dateListener(){
 google.maps.event.addDomListener(map,'zoom_changed', function() {
   zoom =  map.getZoom();
   urlExtra.zoom = zoom;
-  history.pushState({}, "", "/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
+  history.pushState({}, "", "/scw/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
 });
 
 map.addListener('center_changed', function() {
@@ -59,7 +59,7 @@ map.addListener('center_changed', function() {
     var center = map.getCenter();
     lat = center.lat()
     lang = center.lng()
-    history.pushState({}, "", "/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
+    history.pushState({}, "", "/scw/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
   }
 });
 
@@ -84,7 +84,7 @@ function changeMap(type){
   console.log(date.getDate());
   console.log("DATA:" + data);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/mapUpdate", true);
+  xhr.open("POST", "http://"+document.domain+"/scw/mapUpdate", true);
   xhr.setRequestHeader("Content-type","application/json");
   xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && xhr.status == 200) {
@@ -103,7 +103,7 @@ function changeMap(type){
           urlExtra.date = response.mapDate.substring(0,10);
           urlExtra.zoom = map.getZoom();
           urlExtra.center = map.getCenter();
-          history.pushState({}, "", "/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
+          history.pushState({}, "", "/scw/?"+urlExtra.date+'/'+urlExtra.zoom+'/'+urlExtra.center);
           dateSelector.value = urlExtra.date;
           var dateParts = dateSelector.value.split('-');
           date = new Date (dateParts[0],dateParts[1]-1,dateParts[2]);
