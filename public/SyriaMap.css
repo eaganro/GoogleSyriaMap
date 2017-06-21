@@ -1,6 +1,5 @@
 #left{
   position: fixed;
-  float:left;
   margin-left: 1rem;
   margin-top: 3rem;
   z-index: 10;
@@ -14,6 +13,10 @@
   padding-left: 3rem;
   font-family: serif;
   font-size: 15px;
+  height: 18px;
+
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
 }
 #mapDate:hover{
   background-color: rgba(0,0,0,0.7);
@@ -27,16 +30,17 @@
 }
 
 #buttonDiv{
-  margin-top: -.05em;
+  margin-top: -1.5px;
 }
 
 #dropButton{
   background-color: rgba(0,0,0,0.5);
-  width:15.4em;
+  width:11.55rem;
   border: none;
   color: white;
   font-family: serif;
   font-size: 12px;
+  height: 18px;
 }
 
 #dropButton:hover{
@@ -47,7 +51,7 @@
 .key{
   display:none;
   background-color: rgba(0,0,0,0.5);
-  width: 11.55em;
+  width: 11.55rem;
 }
 
 .showKey{
@@ -59,17 +63,17 @@
 }
 
 #keyTable tr th:first-child{
-  width: 9em;
+  width: 9rem;
 }
 #keyTable tr th{
-  width: 2em;
+  width: 2rem;
 }
 
 #keyTable tr td:first-child{
-  width: 9em;
+  width: 9rem;
 }
 #keyTable tr td{
-  width: 2em;
+  width: 2rem;
 }
 
 #preMapBut{
@@ -78,17 +82,19 @@
   color: white;
   border: none;
   font-family: serif;
-  font-size: 14px;
+  font-size: 13.5px;
+  height: 20px;
 }
 #nextMapBut{
-  width:5.8rem;
-  margin-left: -.3em;
+  width:5.75rem;
+  margin-left: -.25rem;
 
   background-color: rgba(0,0,0,0.5);
   color: white;
   border: none;
   font-family: serif;
-  font-size: 14px;
+  font-size: 13.5px;
+  height: 20px;
 }
 
 #preMapBut:hover{
