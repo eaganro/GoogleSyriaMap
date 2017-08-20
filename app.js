@@ -17,11 +17,12 @@ app.use(bodyParser.json()); // support json encoded bodies
 
 app.use(express.static(__dirname + '/public'));
 
-router.get('/', function(req, res) {
+app.get('/', function(req, res) {
+  console.log("hello rory");
   res.sendFile(__dirname + '/public/SyriaMap.html');
 });
 
-router.post('/mapUpdate', function(req, res) {
+app.post('/mapUpdate', function(req, res) {
   var year = req.body.year;
   var month = req.body.month;
   var day = req.body.day;
@@ -79,7 +80,7 @@ var job = new cronJob({
   cronTime: '59 59 23 * * *',
   onTick: function() {
     console.log("cron");
-    var url = "https://commons.wikimedia.org/w/index.php?title=File:Syrian,_Iraqi,_and_Lebanese_insurgencies.png&dir=prev&offset=20170104023216&limit=500#filehistory";
+    var url = "https://commons.wikimedia.org/w/index.php?title=File:Syrian,_Iraqi,_and_Lebanese_insurgencies.png&offset=&limit=10#filehistory";
     var mapURLs = [];
     var mapDates = [];
     request(url, function(error, response, html){
@@ -145,4 +146,7 @@ var job = new cronJob({
 });
 job.start();
 
-app.listen(3021, 'localhost');
+app.listen(3021, function () {
+  console.log('Example app listening on port 3000!')
+});
+
